@@ -39,6 +39,7 @@ export default {
 			if (newActive == 4) {
 				this.$router.push({ name: "user" });
 			}
+			console.log("");
 		},
 	},
 };
