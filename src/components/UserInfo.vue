@@ -141,7 +141,7 @@ export default defineComponent({
 											duration: 1000,
 										});
 										console.log(res);
-
+										store.commit("resUser", res.data);
 										setTimeout(() => {
 											router.push("/Home/Main");
 										}, 1000);

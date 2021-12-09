@@ -79,16 +79,40 @@
 			<div class="home-content-collage">
 				<div class="home-content-collage-head">精品推荐</div>
 			</div>
+			<van-overlay :show="show" z-index="999">
+				<div class="loading"><van-loading /></div>
+			</van-overlay>
 		</div>
 	</div>
 </template>
 
 <script>
+import { mainInformation } from "../common/service";
 export default {
 	data() {
 		return {
 			value: "",
+			//获取主菜单的商品信息
+			mainShop: this.$store.state.mainShop,
+			//加载
+			show: false,
 		};
 	},
+	created() {
+		if (Object.keys(this.mainShop).length == 0) {
+			this.show = true;
+			mainInformation().then((res) => {
+				console.log(res);
+				this.$store.commit("resMainShop", res.data);
+				this.show = false;
+			});
+		}
+	},
+	methods: {},
 };
 </script>
+<style>
+.loading {
+	margin-top: 50vh;
+}
+</style>

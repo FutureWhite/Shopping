@@ -6,3 +6,6 @@ export const login = (username, password) => {
 export const register = (username, password) => {
 	return http.get("register" + "/" + username + "/" + password);
 };
+export const mainInformation = () => {
+	return http.get("main");
+};

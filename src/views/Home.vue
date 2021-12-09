@@ -19,10 +19,12 @@
 export default {
 	data() {
 		return {
+			//主页底部跳转绑定的数字
 			active: 0,
 		};
 	},
 	methods: {
+		//这是主页面底部点击时绑定的跳转
 		switchTab(newActive) {
 			if (newActive == 0) {
 				this.$router.push({ name: "main" });
@@ -31,15 +33,14 @@ export default {
 				this.$router.push({ name: "type" });
 			}
 			if (newActive == 2) {
-				this.$router.push();
+				this.$router.push({ name: "signin" });
 			}
 			if (newActive == 3) {
-				this.$router.push();
+				this.$router.push({ name: "shopping" });
 			}
 			if (newActive == 4) {
 				this.$router.push({ name: "user" });
 			}
-			console.log("");
 		},
 	},
 };
