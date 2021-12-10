@@ -11,8 +11,8 @@
 			<div class="classification-content-left">
 				<van-sidebar v-model="activeKey">
 					<van-sidebar-item title="水果" @click="goFruits" />
-					<van-sidebar-item title="零食" />
-					<van-sidebar-item title="数码" />
+					<van-sidebar-item title="零食" @click="goSnacks" />
+					<van-sidebar-item title="数码" @click="goDigitals" />
 				</van-sidebar>
 			</div>
 			<div class="classification-content-right">
@@ -26,12 +26,21 @@ export default {
 	data() {
 		return {
 			//类型侧边跳转绑定的数字
-			activeKey: 0,
+			activeKey: this.$store.state.activeKey,
 		};
 	},
 	methods: {
 		goFruits() {
+			this.$store.commit("resActiveKey", 0);
 			this.$router.push({ name: "fruits" });
+		},
+		goSnacks() {
+			this.$store.commit("resActiveKey", 1);
+			this.$router.push({ name: "snacks" });
+		},
+		goDigitals() {
+			this.$store.commit("resActiveKey", 2);
+			this.$router.push({ name: "digitals" });
 		},
 	},
 };

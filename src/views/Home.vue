@@ -21,6 +21,8 @@ export default {
 		return {
 			//主页底部跳转绑定的数字
 			active: 0,
+			//当前分类跳转的数字
+			activeKey: this.$store.state.activeKey,
 		};
 	},
 	methods: {
@@ -30,7 +32,8 @@ export default {
 				this.$router.push({ name: "main" });
 			}
 			if (newActive == 1) {
-				this.$router.push({ name: "type" });
+				this.$store.commit("resActiveKey", 0);
+				this.$router.push({ name: "fruits" });
 			}
 			if (newActive == 2) {
 				this.$router.push({ name: "signin" });
