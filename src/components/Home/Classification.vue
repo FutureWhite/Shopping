@@ -27,7 +27,6 @@ export default {
 		return {
 			//类型侧边跳转绑定的数字
 			activeKey: 0,
-			fruits: this.$store.state.mainShop.Snacks,
 		};
 	},
 	methods: {
