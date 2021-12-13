@@ -16,7 +16,24 @@
 				<van-dropdown-item v-model="value2" :options="option2" />
 			</van-dropdown-menu>
 		</div>
-		<div class="allDetail-main-content"><router-view></router-view></div>
+		<div class="allDetail-main-content">
+			<div class="allShop-main">
+				<div
+					class="allShop-main-content"
+					v-for="item in list"
+					:key="item.g_id"
+				>
+					<div class="allShop-main-content-word">
+						<div class="allShop-main-content-word-name">
+							{{ item.g_name }}
+						</div>
+						<div class="allShop-main-content-word-price">
+							￥{{ item.price }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -35,12 +52,25 @@ export default {
 				{ text: "价格升序", value: "b" },
 				{ text: "价格降序", value: "c" },
 			],
+			list: [],
 		};
 	},
 	methods: {
 		onClickLeft() {
-			this.$router.back();
+			const params = this.$route.params;
+			this.$router.push({
+				name: "type",
+				query: { backSub: params.type },
+			});
 		},
+	},
+	created() {
+		const { type, id } = this.$route.params;
+		const goodList = this.$store.state.mainShop[type];
+		const good = goodList.filter((good) => good.g_id === Number(id));
+		if (good && good.length === 1) {
+			this.list = JSON.parse(good[0].goodspulsList);
+		}
 	},
 };
 </script>

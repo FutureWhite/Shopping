@@ -32,6 +32,9 @@ export default {
 		backUser() {
 			this.$router.back();
 		},
+		onSave(res) {
+			console.log(res);
+		},
 	},
 };
 </script>

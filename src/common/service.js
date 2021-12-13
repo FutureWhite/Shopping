@@ -9,3 +9,6 @@ export const register = (username, password) => {
 export const mainInformation = () => {
 	return http.get("main");
 };
+export const addAddress = (obj) => {
+	return http.get("addess", obj);
+};

@@ -36,6 +36,9 @@ export default {
 		backUser() {
 			this.$router.back();
 		},
+		onAdd() {
+			this.$router.push({ name: "updataaddress" });
+		},
 	},
 };
 </script>

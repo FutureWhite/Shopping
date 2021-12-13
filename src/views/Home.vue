@@ -16,6 +16,13 @@
 </template>
 
 <script>
+const routeConfigs = [
+	{ name: "main", active: 0 },
+	{ name: "type", active: 1 },
+	{ name: "signin", active: 2 },
+	{ name: "shopping", active: 3 },
+	{ name: "user", active: 4 },
+];
 export default {
 	data() {
 		return {
@@ -28,22 +35,21 @@ export default {
 	methods: {
 		//这是主页面底部点击时绑定的跳转
 		switchTab(newActive) {
-			if (newActive == 0) {
-				this.$router.push({ name: "main" });
-			}
-			if (newActive == 1) {
-				this.$store.commit("resActiveKey", 0);
-				this.$router.push({ name: "fruits" });
-			}
-			if (newActive == 2) {
-				this.$router.push({ name: "signin" });
-			}
-			if (newActive == 3) {
-				this.$router.push({ name: "shopping" });
-			}
-			if (newActive == 4) {
-				this.$router.push({ name: "user" });
-			}
+			routeConfigs.forEach((config) => {
+				if (config.active === newActive) {
+					this.$router.push({ name: config.name });
+				}
+			});
+		},
+	},
+	watch: {
+		$route(to) {
+			const routeName = to.path.split("/")[2].toLowerCase();
+			routeConfigs.forEach((config) => {
+				if (config.name === routeName) {
+					this.active = config.active;
+				}
+			});
 		},
 	},
 };
