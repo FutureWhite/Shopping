@@ -1,12 +1,12 @@
 <template>
 	<div class="home">
-		<router-view></router-view>
+		<router-view @children-lenght="childrenLenght"></router-view>
 		<div class="home-foot">
 			<van-tabbar v-model="active" @change="switchTab">
 				<van-tabbar-item icon="home-o">首页</van-tabbar-item>
 				<van-tabbar-item icon="apps-o">分类</van-tabbar-item>
 				<van-tabbar-item icon="underway-o">签到</van-tabbar-item>
-				<van-tabbar-item icon="shopping-cart-o" badge="20"
+				<van-tabbar-item icon="shopping-cart-o" :badge="shoppingLenght"
 					>购物车</van-tabbar-item
 				>
 				<van-tabbar-item icon="user-o">用户中心</van-tabbar-item>
@@ -30,6 +30,7 @@ export default {
 			active: 0,
 			//当前分类跳转的数字
 			activeKey: this.$store.state.activeKey,
+			shoppingLenght: this.$store.state.shoppingLenght,
 		};
 	},
 	methods: {
@@ -41,9 +42,7 @@ export default {
 				}
 			});
 		},
-	},
-	watch: {
-		$route(to) {
+		backSwitchTab(to) {
 			const routeName = to.path.split("/")[2].toLowerCase();
 			routeConfigs.forEach((config) => {
 				if (config.name === routeName) {
@@ -51,6 +50,18 @@ export default {
 				}
 			});
 		},
+		//这是shopping里面删除时传来的的购物车数字显示
+		childrenLenght(Lenght) {
+			this.shoppingLenght = Lenght;
+		},
+	},
+	watch: {
+		$route: "backSwitchTab",
+	},
+	beforeRouteEnter(to, _, next) {
+		next((_this) => {
+			_this.backSwitchTab(to);
+		});
 	},
 };
 </script>

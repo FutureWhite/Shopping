@@ -22,6 +22,7 @@
 					class="allShop-main-content"
 					v-for="item in list"
 					:key="item.g_id"
+					@click="goDetail(item)"
 				>
 					<div class="allShop-main-content-word">
 						<div class="allShop-main-content-word-name">
@@ -62,6 +63,10 @@ export default {
 				name: "type",
 				query: { backSub: params.type },
 			});
+		},
+		goDetail(item) {
+			this.$store.commit("resAllShopSave", item);
+			this.$router.push({ name: "GoodDetail" });
 		},
 	},
 	created() {

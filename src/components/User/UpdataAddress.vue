@@ -34,6 +34,7 @@ export default {
 		},
 		onSave(res) {
 			console.log(res);
+			this.$store.commit("addressAllInformation", res);
 		},
 	},
 };

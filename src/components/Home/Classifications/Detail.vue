@@ -56,7 +56,11 @@
 					text="已收藏"
 					color="#ff5000"
 				/>
-				<van-action-bar-button type="warning" text="加入购物车" />
+				<van-action-bar-button
+					type="warning"
+					text="加入购物车"
+					@click="addShopping"
+				/>
 				<van-action-bar-button type="danger" text="立即购买" />
 			</van-action-bar>
 		</div>
@@ -64,16 +68,33 @@
 </template>
 
 <script>
+import { addShoppingH } from "../../../common/service";
+import { Notify } from "vant";
 export default {
 	data() {
 		return {
 			//商品的详细信息
 			shoppingInformation: this.$store.state.allShopSave,
+			//处理后的商品信息
+			allShopSaveAfter: this.$store.getters.allShopSaveAfter,
 		};
 	},
 	methods: {
 		onClickLeft() {
 			this.$router.back();
+		},
+		addShopping() {
+			addShoppingH(this.allShopSaveAfter).then((res) => {
+				console.log(res);
+
+				Notify({
+					type: "success",
+					message: "成功加入购物车",
+					duration: 500,
+				});
+
+				this.$store.commit("resShoppingLenght", res.data.length);
+			});
 		},
 	},
 };

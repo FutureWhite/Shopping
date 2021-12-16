@@ -11,6 +11,7 @@ import SignIn from "../components/Home/SignIn.vue";
 import Address from "../components/User/Address.vue";
 import UpdataAddress from "../components/User/UpdataAddress.vue";
 import GoodDetail from "../components/Home/Classifications/Detail.vue";
+
 const routes = [
 	{
 		path: "/",
@@ -35,7 +36,6 @@ const routes = [
 				component: SubGoods,
 				name: "subGood",
 			},
-
 			{
 				path: "User",
 				component: User,
@@ -55,7 +55,7 @@ const routes = [
 		],
 	},
 	{
-		path: "/Home/Type/GoodDetail",
+		path: "/Home/GoodDetail",
 		component: GoodDetail,
 		name: "GoodDetail",
 	},

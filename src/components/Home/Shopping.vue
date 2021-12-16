@@ -8,12 +8,15 @@
 			</van-nav-bar>
 		</div>
 		<div class="shopping-main-content">
-			<van-swipe-cell>
+			<van-swipe-cell
+				v-for="shoppingList in shoppingLists"
+				:key="shoppingList.id"
+			>
 				<van-card
-					num="2"
-					price="2.00"
+					:num="shoppingList.quantity"
+					:price="shoppingList.price"
 					desc="描述信息"
-					title="商品标题"
+					:title="shoppingList.name"
 					class="goods-card"
 					thumb="https://img01.yzcdn.cn/vant/cat.jpeg"
 				/>
@@ -23,13 +26,14 @@
 						text="删除"
 						type="danger"
 						class="delete-button"
+						@click="shoppingDel(shoppingList)"
 					/>
 				</template>
 			</van-swipe-cell>
 		</div>
 		<div class="shopping-main-foot">
 			<van-submit-bar
-				:price="3050"
+				:price="getAllMoney"
 				button-text="提交订单"
 				class="shopping-commit"
 			/>
@@ -38,11 +42,41 @@
 </template>
 
 <script>
+import { ShoppingB } from "../../common/service.js";
+import { shoppingD } from "../../common/service.js";
 export default {
 	data() {
-		return {};
+		return {
+			shoppingLists: this.$store.state.shopping,
+			userid: this.$store.state.userInformation.id,
+		};
 	},
-	methods: {},
+	methods: {
+		shoppingDel(shoppingList) {
+			shoppingD(shoppingList.id, this.userid).then((res) => {
+				console.log(res);
+				this.shoppingLists = res.data.shopping;
+				this.$emit("childrenLenght", res.data.length);
+				this.$store.commit("resShoppingLenght", res.data.length);
+			});
+		},
+	},
+	created() {
+		ShoppingB(this.userid).then((res) => {
+			console.log(res);
+			this.shoppingLists = res.data;
+		});
+		console.log(this.$store.state);
+	},
+	computed: {
+		getAllMoney: function () {
+			let money = 0;
+			for (let i = 0; i < this.shoppingLists.length; i++) {
+				money = this.shoppingLists[i].price + money;
+			}
+			return money * 100;
+		},
+	},
 };
 </script>
 
@@ -50,6 +84,7 @@ export default {
 .shopping-main-content {
 	height: calc(100vh - 150px);
 	width: 100%;
+	overflow: auto;
 }
 .shopping-main-foot {
 	transform: calc(1);
