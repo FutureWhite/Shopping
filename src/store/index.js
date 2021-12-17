@@ -40,6 +40,10 @@ const store = createStore({
 		resShoppingLenght(state, params) {
 			state.shoppingLenght = params;
 		},
+		//增加地址总地址
+		resAddressAllInformation(state, params) {
+			state.addressAllInformation = params;
+		},
 	},
 	getters: {
 		//临时商品处理后的数据
@@ -55,13 +59,17 @@ const store = createStore({
 		//处理后的地址信息
 		addressAllInformationAfter(state) {
 			const obj = {};
-			obj.address =
+			obj.user_id = state.userInformation.id;
+			obj.user_name = state.addressAllInformation.name;
+			obj.dz_name =
+				state.addressAllInformation.province +
+				"/" +
 				state.addressAllInformation.city +
 				"/" +
-				state.addressAllInformation.county +
-				"/" +
-				state.addressAllInformation.country;
+				state.addressAllInformation.county;
 
+			obj.tel = Number(state.addressAllInformation.tel);
+			obj.yzbm = Number(state.addressAllInformation.postalCode);
 			return obj;
 		},
 	},

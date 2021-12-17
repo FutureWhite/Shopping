@@ -24,6 +24,8 @@
 
 <script>
 import { areaList } from "@vant/area-data";
+import { addAddress } from "../../common/service.js";
+import { Notify } from "vant";
 export default {
 	data() {
 		return { areaList };
@@ -34,7 +36,18 @@ export default {
 		},
 		onSave(res) {
 			console.log(res);
-			this.$store.commit("addressAllInformation", res);
+			this.$store.commit("resAddressAllInformation", res);
+			addAddress(this.$store.getters.addressAllInformationAfter).then(
+				(res) => {
+					console.log(res);
+					Notify({
+						type: "success",
+						message: "保存地址成功",
+						duration: 1200,
+					});
+					this.$router.back();
+				}
+			);
 		},
 	},
 };

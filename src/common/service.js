@@ -9,8 +9,11 @@ export const register = (username, password) => {
 export const mainInformation = () => {
 	return http.get("main");
 };
-export const addAddress = () => {
-	return http.post("addess");
+export const addAddress = (obj) => {
+	return http.post("addess", obj);
+};
+export const showAddress = (userid) => {
+	return http.get("sel2" + "/" + userid);
 };
 export const addShoppingH = (obj) => {
 	return http.post("Purchase", obj);

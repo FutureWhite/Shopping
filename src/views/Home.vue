@@ -43,12 +43,14 @@ export default {
 			});
 		},
 		backSwitchTab(to) {
-			const routeName = to.path.split("/")[2].toLowerCase();
-			routeConfigs.forEach((config) => {
-				if (config.name === routeName) {
-					this.active = config.active;
-				}
-			});
+			if (to.path.split("/").lenght >= 3) {
+				const routeName = to.path.split("/")[2].toLowerCase();
+				routeConfigs.forEach((config) => {
+					if (config.name === routeName) {
+						this.active = config.active;
+					}
+				});
+			}
 		},
 		//这是shopping里面删除时传来的的购物车数字显示
 		childrenLenght(Lenght) {

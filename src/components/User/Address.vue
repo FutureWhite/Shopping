@@ -17,19 +17,13 @@
 	</div>
 </template>
 <script>
+import { showAddress } from "../../common/service";
 export default {
 	data() {
 		return {
 			chosenAddressId: "1",
-			list: [
-				{
-					id: "1",
-					name: "张三",
-					tel: "13000000000",
-					address: "地球 中国",
-					isDefault: true,
-				},
-			],
+			list: [],
+			userid: this.$store.state.userInformation.id,
 		};
 	},
 	methods: {
@@ -39,6 +33,22 @@ export default {
 		onAdd() {
 			this.$router.push({ name: "updataaddress" });
 		},
+	},
+	created() {
+		showAddress(this.userid).then((res) => {
+			console.log(res);
+			const arr = [];
+			for (let i = 0; i < res.data.length; i++) {
+				let obj = {};
+				obj.id = i + 1;
+				obj.name = res.data[i].user_name;
+				obj.tel = res.data[i].tel;
+				obj.address = res.data[i].dz_name;
+
+				arr.push(obj);
+			}
+			this.list = arr;
+		});
 	},
 };
 </script>
