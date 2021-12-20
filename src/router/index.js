@@ -10,6 +10,7 @@ import SubGoods from "../components/Home/Classifications/SubGoods.vue";
 import SignIn from "../components/Home/SignIn.vue";
 import Address from "../components/User/Address.vue";
 import UpdataAddress from "../components/User/UpdataAddress.vue";
+import DeleteAddress from "../components/User/DeleteAddress.vue";
 import GoodDetail from "../components/Home/Classifications/Detail.vue";
 
 const routes = [
@@ -46,6 +47,11 @@ const routes = [
 						path: "UpdataAddress",
 						component: UpdataAddress,
 						name: "updataaddress",
+					},
+					{
+						path: "DeleteAddress",
+						component: DeleteAddress,
+						name: "deleteAddress",
 					},
 				],
 			},

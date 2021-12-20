@@ -24,3 +24,9 @@ export const ShoppingB = (userid) => {
 export const shoppingD = (id, userid) => {
 	return http.get("del2" + "/" + id + "/" + userid);
 };
+export const deleteAddress = (id) => {
+	return http.get("deless" + "/" + id);
+};
+export const updataAddress = (obj) => {
+	return http.post("updess", obj);
+};

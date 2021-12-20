@@ -33,14 +33,18 @@ export default {
 		onAdd() {
 			this.$router.push({ name: "updataaddress" });
 		},
+		onEdit(res) {
+			console.log(res);
+			this.$store.commit("resUpdataAddress", res);
+			this.$router.push({ name: "deleteAddress" });
+		},
 	},
 	created() {
 		showAddress(this.userid).then((res) => {
-			console.log(res);
 			const arr = [];
 			for (let i = 0; i < res.data.length; i++) {
 				let obj = {};
-				obj.id = i + 1;
+				obj.id = res.data[i].dz_id;
 				obj.name = res.data[i].user_name;
 				obj.tel = res.data[i].tel;
 				obj.address = res.data[i].dz_name;

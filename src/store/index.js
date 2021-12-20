@@ -14,6 +14,8 @@ const store = createStore({
 		allShopSave: {},
 		//购物车
 		shopping: [],
+		//修改地址的临时存放
+		updataAddress: {},
 	},
 	mutations: {
 		//用户信息
@@ -44,6 +46,10 @@ const store = createStore({
 		resAddressAllInformation(state, params) {
 			state.addressAllInformation = params;
 		},
+		//修改地址
+		resUpdataAddress(state, params) {
+			state.updataAddress = params;
+		},
 	},
 	getters: {
 		//临时商品处理后的数据
@@ -66,10 +72,40 @@ const store = createStore({
 				"/" +
 				state.addressAllInformation.city +
 				"/" +
-				state.addressAllInformation.county;
+				state.addressAllInformation.county +
+				"/" +
+				state.addressAllInformation.addressDetail;
 
 			obj.tel = Number(state.addressAllInformation.tel);
 			obj.yzbm = Number(state.addressAllInformation.postalCode);
+			return obj;
+		},
+		//处理后修改地址信息
+		updataAddressAfter(state) {
+			const obj = {};
+			obj.dz_id = state.updataAddress.id;
+			obj.user_id = state.userInformation.id;
+			obj.user_name = state.updataAddress.name;
+			obj.dz_name =
+				state.updataAddress.province +
+				"/" +
+				state.updataAddress.city +
+				"/" +
+				state.updataAddress.county +
+				"/" +
+				state.updataAddress.addressDetail;
+
+			obj.tel = Number(state.updataAddress.tel);
+			obj.yzbm = Number(state.updataAddress.postalCode);
+			return obj;
+		},
+		//处理后的修改地址
+		addressUpdata(state) {
+			const obj = {};
+			obj.id = state.updataAddress.id;
+			obj.name = state.updataAddress.name;
+			obj.tel = state.updataAddress.tel;
+			obj.addressDetail = state.addressAllInformation.addressDetail;
 			return obj;
 		},
 	},

@@ -63,10 +63,8 @@ export default {
 	},
 	created() {
 		ShoppingB(this.userid).then((res) => {
-			console.log(res);
 			this.shoppingLists = res.data;
 		});
-		console.log(this.$store.state);
 	},
 	computed: {
 		getAllMoney: function () {
