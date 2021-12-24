@@ -36,6 +36,7 @@
 				:price="getAllMoney"
 				button-text="提交订单"
 				class="shopping-commit"
+				@click="pay"
 			/>
 		</div>
 	</div>
@@ -59,6 +60,9 @@ export default {
 				this.$emit("childrenLenght", res.data.length);
 				this.$store.commit("resShoppingLenght", res.data.length);
 			});
+		},
+		pay() {
+			this.$router.push({ name: "order" });
 		},
 	},
 	created() {

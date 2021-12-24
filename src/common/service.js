@@ -30,3 +30,6 @@ export const deleteAddress = (id) => {
 export const updataAddress = (obj) => {
 	return http.post("updess", obj);
 };
+export const alipay = () => {
+	return http.get("alipay/webPay");
+};

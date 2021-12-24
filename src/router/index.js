@@ -12,7 +12,7 @@ import Address from "../components/User/Address.vue";
 import UpdataAddress from "../components/User/UpdataAddress.vue";
 import DeleteAddress from "../components/User/DeleteAddress.vue";
 import GoodDetail from "../components/Home/Classifications/Detail.vue";
-
+import Order from "../components/Order.vue";
 const routes = [
 	{
 		path: "/",
@@ -64,6 +64,11 @@ const routes = [
 		path: "/Home/GoodDetail",
 		component: GoodDetail,
 		name: "GoodDetail",
+	},
+	{
+		path: "/Home/Order",
+		component: Order,
+		name: "order",
 	},
 ];
 
